@@ -1,0 +1,122 @@
+---
+title: "Demand Heatmap"
+author: "Angelo Morelli"
+format: html
+execute:
+  echo: false
+  message: false
+  warning: false
+---
+
+```{r}
+#| label: setup
+
+library(httr)
+library(jsonlite)
+library(dplyr)
+library(plotly)
+```
+
+```{r}
+# Define the GBFS feed URLs
+station_status_url <- "https://gbfs.citibikenyc.com/gbfs/en/station_status.json"
+station_info_url <- "https://gbfs.citibikenyc.com/gbfs/en/station_information.json"
+
+# Function to fetch and parse JSON data
+fetch_gbfs_data <- function(url) {
+  response <- GET(url)
+  if (status_code(response) == 200) {
+    data <- content(response, "text", encoding = "UTF-8")
+    parsed_data <- fromJSON(data)
+    return(parsed_data$data)
+  } else {
+    stop("Failed to fetch data from the GBFS feed.")
+  }
+}
+
+# Fetch station status and information data
+station_status <- fetch_gbfs_data(station_status_url)$stations
+station_info <- fetch_gbfs_data(station_info_url)$stations
+
+# Combine the two datasets
+combined_data <- station_status %>%
+  left_join(station_info, by = "station_id")
+
+# View the combined data
+# head(combined_data)
+```
+
+
+```{r}
+# Fetch the first snapshot
+current_snapshot <- combined_data
+
+# Simulate a second snapshot by fetching the data again after a short delay
+Sys.sleep(60)  # Wait for 60 seconds (adjust as needed)
+second_snapshot <- fetch_gbfs_data(station_status_url)$stations %>%
+  left_join(station_info, by = "station_id")
+
+# Now we have two snapshots to calculate changes
+previous_snapshot <- current_snapshot
+current_snapshot <- second_snapshot
+```
+
+```{r}
+# Function to calculate changes between two snapshots
+calculate_changes <- function(current_snapshot, previous_snapshot) {
+  changes <- current_snapshot %>%
+    left_join(previous_snapshot, by = "station_id", suffix = c(".current", ".previous")) %>%
+    mutate(
+      bikes_rented = num_bikes_available.previous - num_bikes_available.current,
+      bikes_returned = num_bikes_available.current - num_bikes_available.previous,
+      net_demand = bikes_returned - bikes_rented
+    ) %>%
+    select(station_id, bikes_rented, bikes_returned, net_demand)
+  
+  return(changes)
+}
+
+# Calculate changes
+changes <- calculate_changes(current_snapshot, previous_snapshot)
+
+# View the changes
+# print(changes)
+```
+
+```{r}
+# Merge changes with station information
+heatmap_data <- changes %>%
+  left_join(station_info, by = "station_id") %>%
+  filter(!is.na(lat) & !is.na(lon))  # Remove stations with missing location data
+
+# View the heatmap data
+# head(heatmap_data)
+```
+
+```{r}
+# Create the heatmap
+heatmap <- plot_ly(
+  data = heatmap_data,
+  lat = ~lat,
+  lon = ~lon,
+  z = ~net_demand,  # Use net demand for coloring
+  type = "densitymapbox",
+  radius = 10,  # Adjust the radius of the heatmap points
+  colorscale = "Viridis",  # Use a color scale
+  colorbar = list(title = "Net Demand")  # Add a color bar
+) %>%
+  layout(
+    mapbox = list(
+      style = "open-street-map",  # Use OpenStreetMap as the base map
+      center = list(lon = -73.935242, lat = 40.730610),  # Center on NYC
+      zoom = 11  # Adjust the zoom level
+    ),
+    title = "Citi Bike Demand Heatmap (Net Demand)",
+    margin = list(t = 40)  # Add margin for the title
+  )
+
+# Display the heatmap
+heatmap
+```
+
+  

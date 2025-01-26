@@ -1,0 +1,48 @@
+---
+title: "Monthly Demand"
+author: "Angelo Morelli"
+format: html
+execute:
+  echo: false
+  message: false
+  warning: false
+---
+
+```{r}
+#| label: setup
+
+library(tidyverse)
+library(ggplot2)
+library(scales)
+```
+
+```{r}
+monthly_hourly_demand <- trip_data |>
+  mutate(
+    month = format(started_at, "%B"),  # Extract month name (e.g., "July", "December")
+    hour = as.numeric(format(started_at, "%H"))  # Extract hour as numeric (0-23)
+  ) |>
+  filter(month %in% c("July", "December")) |>  # Keep only July and December
+  group_by(month, hour) |>
+  summarise(total_trips = n(), .groups = "drop")
+
+# View the aggregated data
+head(monthly_hourly_demand)
+```
+
+```{r}
+# Grouped plot comparing July and December
+ggplot(monthly_hourly_demand, aes(x = hour, y = total_trips, color = month)) +
+  geom_line(size = 1) +  # Add line for trends
+  geom_point(size = 2) +  # Add points for emphasis
+  labs(title = "Bike Demand by Hour of the Day (July vs. December)",
+       x = "Hour of the Day",
+       y = "Total Trips",
+       color = "Month") +
+  scale_x_continuous(breaks = 0:23, labels = paste0(0:23, ":00")) +  # Format x-axis labels
+  scale_y_continuous(labels = unit_format(unit = "k", scale = 1e-3)) +  # Format y-axis labels as "100k", "200k", etc.
+  scale_color_manual(values = c("July" = "darkblue", "December" = "darkred")) +  # Custom colors for months
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability
+```
+
