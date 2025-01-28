@@ -1,0 +1,94 @@
+---
+title: "Casual vs. Member Usage"
+author: "Angelo Morelli"
+format: html
+execute:
+  echo: false
+  message: false
+  warning: false
+---
+
+```{r}
+#| label: setup
+
+library(tidyverse)
+library(ggplot2)
+library(scales)
+```
+
+```{r}
+#| cache: TRUE
+
+june_data1 <- read_csv("202406-citibike-tripdata_1.csv")
+june_data2 <- read_csv("202406-citibike-tripdata_2.csv")
+june_data3 <- read_csv("202406-citibike-tripdata_3.csv")
+june_data4 <- read_csv("202406-citibike-tripdata_4.csv")
+june_data5 <- read_csv("202406-citibike-tripdata_5.csv")
+june_data <- bind_rows(june_data1, june_data2, june_data3, june_data4, june_data5)
+
+december_data1 <- read_csv("202412-citibike-tripdata_1.csv")
+december_data2 <- read_csv("202412-citibike-tripdata_2.csv")
+december_data3 <- read_csv("202412-citibike-tripdata_3.csv")
+december_data <- bind_rows(december_data1, december_data2, december_data3)
+
+trip_data <- bind_rows(june_data, december_data)
+```
+
+```{r}
+trip_data <- trip_data |>
+  mutate(
+    ride_duration = as.numeric(difftime(ended_at, started_at, units = "mins")),  # Duration in minutes
+    hour_of_day = as.numeric(format(started_at, "%H"))  # Hour of the day (0-23)
+  )
+```
+
+```{r}
+# Plot ride duration distribution
+ggplot(trip_data, aes(x = ride_duration, fill = member_casual)) +
+  geom_density(alpha = 0.5) +  # Density plot with transparency
+  labs(title = "Distribution of Ride Durations (Members vs. Casual Users)",
+       x = "Ride Duration (Minutes)",
+       y = "Density",
+       fill = "User Type") +
+  scale_x_continuous(limits = c(0, 120)) +  # Limit x-axis to 0-120 minutes for better visualization
+  theme_minimal()
+```
+
+```{r}
+# Aggregate rides by hour of the day and user type
+hourly_usage <- trip_data |>
+  group_by(hour_of_day, member_casual) |>
+  summarise(total_rides = n(), .groups = "drop")
+
+# Plot hourly usage
+ggplot(hourly_usage, aes(x = hour_of_day, y = total_rides, fill = member_casual)) +
+  geom_bar(stat = "identity", position = "dodge") +  # Bar plot with grouped bars
+  labs(title = "Hourly Bike Usage (Members vs. Casual Users)",
+       x = "Hour of the Day",
+       y = "Total Rides",
+       fill = "User Type") +
+  scale_x_continuous(breaks = 0:23, labels = paste0(0:23, ":00")) +  # Format x-axis labels
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability
+```
+
+```{r}
+# Aggregate average ride duration by hour of the day and user type
+avg_duration_by_hour <- trip_data |>
+  group_by(hour_of_day, member_casual) |>
+  summarise(avg_duration = mean(ride_duration, na.rm = TRUE), .groups = "drop")
+
+# Plot average ride duration by hour
+ggplot(avg_duration_by_hour, aes(x = hour_of_day, y = avg_duration, color = member_casual)) +
+  geom_line(linewidth = 1) +  # Line plot
+  geom_point(size = 2) +  # Add points for emphasis
+  labs(title = "Average Ride Duration by Hour (Members vs. Casual Users)",
+       subtitle = "Casual users ride longer than members",
+       x = "Hour of the Day",
+       y = "Average Ride Duration (Minutes)",
+       color = "User Type") +
+  scale_x_continuous(breaks = 0:23, labels = paste0(0:23, ":00")) +  # Format x-axis labels
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability
+```
+

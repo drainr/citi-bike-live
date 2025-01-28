@@ -9,6 +9,9 @@ website:
         text: Home
       - about.qmd
       - analysis.qmd
+      - hourlydemand.qmd
+      - monthlydemand.qmd
+      - membervcasual.qmd
 
 format:
   html:

@@ -8,3 +8,5 @@
 *.zip
 .DS_Store
 _site/
+*_cache/
+*_files/

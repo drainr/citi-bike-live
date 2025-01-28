@@ -14,6 +14,17 @@ execute:
 library(tidyverse)
 library(ggplot2)
 library(scales)
+library(readr)
+```
+
+```{r}
+#| cache: TRUE
+
+june_data <- read_csv(unzip("202406-citibike-tripdata.zip"))
+
+december_data <- read_csv(unzip("202412-citibike-tripdata.zip"))
+                          
+trip_data <- bind_rows(june_data, december_data)
 ```
 
 

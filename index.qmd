@@ -2,6 +2,14 @@
 title: "Citi Bikes"
 ---
 
-This is a Quarto website.
+The CitiBike data from New York City can provide alot of insight as to how a large portion of the population moves on a regular basis.
+I gathered this data from the CitiBikes in New York, specifically from the months of June and December 2024, as well as their feed of live data. The main goal of this project was to better understand how to work with data.
+Most users follow the general trends you see in other forms of transportation.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+ ```{=html}
+<iframe src="https://drainr.shinyapps.io/citibike-heatmap/" 
+        width="100%" 
+        height="800px" 
+        style="border:none;">
+</iframe>
+```
