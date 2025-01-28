@@ -8,6 +8,10 @@ execute:
   warning: false
 ---
 
+## Casual vs. Member Usage
+
+This page examines the differences in casual CitiBike usage vs. how CitiBike members use their bikes. Ride durations, hourly patterns, and average ride times uncover insights on how these two groups differ in usage.
+
 ```{r}
 #| label: setup
 
@@ -34,6 +38,10 @@ december_data <- bind_rows(december_data1, december_data2, december_data3)
 trip_data <- bind_rows(june_data, december_data)
 ```
 
+# Distribution of Ride Duration
+
+This density plot displays a main difference in how these bikes are typically used, and that would be (most likely) the commuter vs. leisure crowd. Members show a higher density in shorter rides because they are usually taking shorter trips, more focused on transport than sightseeing.
+
 ```{r}
 trip_data <- trip_data |>
   mutate(
@@ -54,6 +62,10 @@ ggplot(trip_data, aes(x = ride_duration, fill = member_casual)) +
   theme_minimal()
 ```
 
+# Hourly Bike Usage
+
+This bar chart shows the number of rides taken by hour, grouped by user type. Members exhibit a strong commuting pattern, with peaks in the early morning and late afternoon. Casual users display a more even distribution throughout the day, with higher activity during midday, though still following the general pattern.
+
 ```{r}
 # Aggregate rides by hour of the day and user type
 hourly_usage <- trip_data |>
@@ -71,6 +83,10 @@ ggplot(hourly_usage, aes(x = hour_of_day, y = total_rides, fill = member_casual)
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability
 ```
+
+# Average Ride Duration by Hour of the Day
+
+This plot explores average ride duration for both types of riders at all times of day, further revealing the trend of longer, more lax rides for casuals and shorter, more focused rides for members.
 
 ```{r}
 # Aggregate average ride duration by hour of the day and user type

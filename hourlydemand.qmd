@@ -17,6 +17,10 @@ library(scales)
 library(readr)
 ```
 
+# Bike Demand, by Hour
+
+As people head to work, grab lunch, or return home, Citi Bikes play a crucial role in urban mobility, trending with the "rush hour" schedule of the average person's daily transportation.
+
 ```{r}
 #| cache: TRUE
 
@@ -41,6 +45,7 @@ ggplot(hourly_demand, aes(x = hour,
   geom_line(group = 1, 
             color = "darkblue") +
   labs(title = "Bike Demand by Hour of the Day",
+       subtitle = "Bike demand mirrors the city's daily schedule.",
        x = "Hour of the Day",
        y = "Total Trips") +
   scale_x_continuous(breaks = 0:23, 

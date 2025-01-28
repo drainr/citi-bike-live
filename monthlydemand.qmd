@@ -8,6 +8,10 @@ execute:
   warning: false
 ---
 
+## Bike Demand, by Hour of the Day & Day of the Month 
+
+This page explores bike usage patterns between two separate months, revealing differences and trends in user behavior dependent upon time.
+
 ```{r}
 #| label: setup
 
@@ -25,6 +29,10 @@ december_data <- read_csv(unzip("202412-citibike-tripdata.zip"))
                           
 trip_data <- bind_rows(june_data, december_data)
 ```
+
+# Demand by Hour of the Day
+
+This graph compares the number of bike trips on the average day in June and December, showing how December usage is quite a bit lower on all fronts (likely due to the colder weather). They both align with the peaks of commuting hours.
 
 ```{r}
 trip_data <- trip_data |>
@@ -53,6 +61,10 @@ ggplot(monthly_demand, aes(x = hour, y = total_trips, color = month)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability
 ```
+
+# Demand by Day of the Month
+
+This graph compares the amount of bike demand by day of the month, where we can observe a couple of behaviors, such as the weekly downturn visible more in June's plotting, likely due to weekday commuters not using the bikes over the weekend, as well as lowest usage being observed during the holiday time in December.
 
 ```{r}
 daily_demand <- trip_data |>

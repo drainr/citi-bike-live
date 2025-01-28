@@ -2,4 +2,9 @@
 title: "About"
 ---
 
-About this site
+I am [Angelo Morelli](https://github.com/drainr) (angelomorelliam08@gmail.com), a Computer Science student at NCF.
+
+[This project](https://github.com/drainr/citi-bike-live) was an exploration of trends among CitiBike riders in New York City.
+
+This project was created as part of [David Kane's Techne: Getting the Future you Want ISP](isp.davidkane.info).
+

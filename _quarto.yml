@@ -8,7 +8,6 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
-      - analysis.qmd
       - hourlydemand.qmd
       - monthlydemand.qmd
       - membervcasual.qmd
