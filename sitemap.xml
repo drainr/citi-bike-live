@@ -2,30 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://drainr.github.io/citi-bike-live/monthlydemand.html</loc>
-    <lastmod>2025-01-27T16:58:14.407Z</lastmod>
-  </url>
-  <url>
-    <loc>https://drainr.github.io/citi-bike-live/hourlydemand.html</loc>
-    <lastmod>2025-01-27T16:58:05.654Z</lastmod>
-  </url>
-  <url>
-    <loc>https://drainr.github.io/citi-bike-live/about.html</loc>
-    <lastmod>2025-01-27T15:05:15.379Z</lastmod>
-  </url>
-  <url>
-    <loc>https://drainr.github.io/citi-bike-live/membervcasual.html</loc>
-    <lastmod>2025-01-28T04:25:02.809Z</lastmod>
-  </url>
-  <url>
-    <loc>https://drainr.github.io/citi-bike-live/index.html</loc>
-    <lastmod>2025-01-28T04:37:36.075Z</lastmod>
+    <lastmod>2025-01-28T13:47:26.435Z</lastmod>
   </url>
   <url>
     <loc>https://drainr.github.io/citi-bike-live/analysis.html</loc>
     <lastmod>2025-01-27T15:05:15.379Z</lastmod>
   </url>
   <url>
-    <loc>https://drainr.github.io/citi-bike-live/heatmap.html</loc>
-    <lastmod>2025-01-28T04:12:53.820Z</lastmod>
+    <loc>https://drainr.github.io/citi-bike-live/index.html</loc>
+    <lastmod>2025-01-28T13:23:51.354Z</lastmod>
+  </url>
+  <url>
+    <loc>https://drainr.github.io/citi-bike-live/membervcasual.html</loc>
+    <lastmod>2025-01-28T13:58:23.729Z</lastmod>
+  </url>
+  <url>
+    <loc>https://drainr.github.io/citi-bike-live/about.html</loc>
+    <lastmod>2025-01-28T13:25:46.991Z</lastmod>
+  </url>
+  <url>
+    <loc>https://drainr.github.io/citi-bike-live/hourlydemand.html</loc>
+    <lastmod>2025-01-28T13:47:28.657Z</lastmod>
   </url>
 </urlset>

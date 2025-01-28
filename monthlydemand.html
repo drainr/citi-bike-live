@@ -98,10 +98,6 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./analysis.html"> 
-<span class="menu-text">Demand Heatmap</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="./hourlydemand.html"> 
 <span class="menu-text">Hourly Demand</span></a>
   </li>  
@@ -124,8 +120,16 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#bike-demand-by-hour-of-the-day-day-of-the-month" id="toc-bike-demand-by-hour-of-the-day-day-of-the-month" class="nav-link active" data-scroll-target="#bike-demand-by-hour-of-the-day-day-of-the-month">Bike Demand, by Hour of the Day &amp; Day of the Month</a></li>
+  <li><a href="#demand-by-hour-of-the-day" id="toc-demand-by-hour-of-the-day" class="nav-link" data-scroll-target="#demand-by-hour-of-the-day">Demand by Hour of the Day</a></li>
+  <li><a href="#demand-by-day-of-the-month" id="toc-demand-by-day-of-the-month" class="nav-link" data-scroll-target="#demand-by-day-of-the-month">Demand by Day of the Month</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -155,6 +159,13 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="bike-demand-by-hour-of-the-day-day-of-the-month" class="level2">
+<h2 class="anchored" data-anchor-id="bike-demand-by-hour-of-the-day-day-of-the-month">Bike Demand, by Hour of the Day &amp; Day of the Month</h2>
+<p>This page explores bike usage patterns between two separate months, revealing differences and trends in user behavior dependent upon time.</p>
+</section>
+<section id="demand-by-hour-of-the-day" class="level1">
+<h1>Demand by Hour of the Day</h1>
+<p>This graph compares the number of bike trips on the average day in June and December, showing how December usage is quite a bit lower on all fronts (likely due to the colder weather). They both align with the peaks of commuting hours.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -164,6 +175,10 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+</section>
+<section id="demand-by-day-of-the-month" class="level1">
+<h1>Demand by Day of the Month</h1>
+<p>This graph compares the amount of bike demand by day of the month, where we can observe a couple of behaviors, such as the weekly downturn visible more in June’s plotting, likely due to weekday commuters not using the bikes over the weekend, as well as lowest usage being observed during the holiday time in December.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -175,6 +190,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

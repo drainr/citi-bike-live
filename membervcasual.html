@@ -98,10 +98,6 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./analysis.html"> 
-<span class="menu-text">Demand Heatmap</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="./hourlydemand.html"> 
 <span class="menu-text">Hourly Demand</span></a>
   </li>  
@@ -124,8 +120,17 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#casual-vs.-member-usage" id="toc-casual-vs.-member-usage" class="nav-link active" data-scroll-target="#casual-vs.-member-usage">Casual vs.&nbsp;Member Usage</a></li>
+  <li><a href="#distribution-of-ride-duration" id="toc-distribution-of-ride-duration" class="nav-link" data-scroll-target="#distribution-of-ride-duration">Distribution of Ride Duration</a></li>
+  <li><a href="#hourly-bike-usage" id="toc-hourly-bike-usage" class="nav-link" data-scroll-target="#hourly-bike-usage">Hourly Bike Usage</a></li>
+  <li><a href="#average-ride-duration-by-hour-of-the-day" id="toc-average-ride-duration-by-hour-of-the-day" class="nav-link" data-scroll-target="#average-ride-duration-by-hour-of-the-day">Average Ride Duration by Hour of the Day</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -155,6 +160,13 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="casual-vs.-member-usage" class="level2">
+<h2 class="anchored" data-anchor-id="casual-vs.-member-usage">Casual vs.&nbsp;Member Usage</h2>
+<p>This page examines the differences in casual CitiBike usage vs.&nbsp;how CitiBike members use their bikes. Ride durations, hourly patterns, and average ride times uncover insights on how these two groups differ in usage.</p>
+</section>
+<section id="distribution-of-ride-duration" class="level1">
+<h1>Distribution of Ride Duration</h1>
+<p>This density plot displays a main difference in how these bikes are typically used, and that would be (most likely) the commuter vs.&nbsp;leisure crowd. Members show a higher density in shorter rides because they are usually taking shorter trips, more focused on transport than sightseeing.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -164,6 +176,10 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+</section>
+<section id="hourly-bike-usage" class="level1">
+<h1>Hourly Bike Usage</h1>
+<p>This bar chart shows the number of rides taken by hour, grouped by user type. Members exhibit a strong commuting pattern, with peaks in the early morning and late afternoon. Casual users display a more even distribution throughout the day, with higher activity during midday, though still following the general pattern.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -173,6 +189,10 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+</section>
+<section id="average-ride-duration-by-hour-of-the-day" class="level1">
+<h1>Average Ride Duration by Hour of the Day</h1>
+<p>This plot explores average ride duration for both types of riders at all times of day, further revealing the trend of longer, more lax rides for casuals and shorter, more focused rides for members.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -184,6 +204,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
