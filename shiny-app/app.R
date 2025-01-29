@@ -28,7 +28,7 @@ fetch_live_data <- function() {
 
 # Shiny UI
 ui <- fluidPage(
-  titlePanel("Animated Bike Availability Heatmap with Enhanced Gradient"),
+  titlePanel("Highest Use Stations, Last 24 Hours"),
   sidebarLayout(
     sidebarPanel(
       sliderInput(
@@ -56,18 +56,18 @@ server <- function(input, output, session) {
   
   # Simulate time series data (hourly changes)
   set.seed(123)
-  stations_time <- stations %>%
-    group_by(station_id) %>%
-    mutate(hourly_bikes = list(sample(0:num_bikes_available, 24, replace = TRUE))) %>%
-    tidyr::unnest(hourly_bikes) %>%
-    mutate(hour = rep(1:24, length.out = n())) %>%
+  stations_time <- stations |>
+    group_by(station_id) |>
+    mutate(hourly_bikes = list(sample(0:num_bikes_available, 24, replace = TRUE))) |>
+    tidyr::unnest(hourly_bikes) |>
+    mutate(hour = rep(1:24, length.out = n())) |>
     ungroup()
   
   # Reactive data based on slider input
   reactive_data <- reactive({
-    stations_time %>%
-      filter(hour == input$time) %>%
-      select(station_id, lat, lon, weight = hourly_bikes)
+    stations_time |>
+      filter(hour == input$time) |>
+      select(station_id, lat, lon, weight = hourly_bikes, name, num_docks_available)
   })
   
   # Timer controls
@@ -82,7 +82,7 @@ server <- function(input, output, session) {
   })
   
   # Auto-play slider
-  timer <- reactiveTimer(1000)
+  timer <- reactiveTimer(1500)
   
   observe({
     if (auto_play()) {
@@ -95,9 +95,9 @@ server <- function(input, output, session) {
   
   # Render Leaflet map
   output$map <- renderLeaflet({
-    leaflet() %>%
-      addTiles() %>%
-      addProviderTiles(providers$CartoDB.Positron) %>%
+    leaflet() |>
+      addTiles() |>
+      addProviderTiles(providers$CartoDB.Positron) |>
       setView(lng = -73.97, lat = 40.75, zoom = 13)
   })
   
@@ -106,7 +106,7 @@ server <- function(input, output, session) {
     data <- reactive_data()
     
     # Enhanced scaling function with better distribution
-    data <- data %>%
+    data <- data |>
       mutate(
         # Use cube root transformation for more balanced distribution
         weight_transformed = weight^(1/3),
@@ -117,8 +117,8 @@ server <- function(input, output, session) {
         weight_norm = 1 / (1 + exp(-4 * (weight_norm - 0.4)))
       )
     
-    # Identify top busy stations
-    top_stations <- data %>% top_n(5, wt = weight)
+    # Identify top busy stations (pickup)
+    top_pickup_stations <- data |> top_n(8, wt = weight)
     
     # Create a more balanced color palette with distinct steps
     colors <- colorRampPalette(c(
@@ -132,9 +132,9 @@ server <- function(input, output, session) {
       "#FF0000"   # Red (high)
     ))(12)
     
-    leafletProxy("map") %>%
-      clearHeatmap() %>%
-      clearMarkers() %>%
+    leafletProxy("map") |>
+      clearHeatmap() |>
+      clearMarkers() |>
       addHeatmap(
         lng = data$lon,
         lat = data$lat,
@@ -144,17 +144,18 @@ server <- function(input, output, session) {
         gradient = colors,
         max = 1,
         minOpacity = 0.35 # Slightly increased minimum opacity
-      ) %>%
+      ) |>
       addPulseMarkers(
-        lng = top_stations$lon,
-        lat = top_stations$lat,
-        icon = makePulseIcon(color = "red", iconSize = 12),
+        lng = top_pickup_stations$lon,
+        lat = top_pickup_stations$lat,
+        icon = makePulseIcon(color = "red", iconSize = 12, heartbeat = 0.5),
         popup = paste0(
-          "Station ID: ", top_stations$station_id,
-          "<br>Available Bikes: ", top_stations$weight
+          "Station Name: ", top_pickup_stations$name,
+          "<br>Available Bikes: ", top_pickup_stations$weight
         )
-      )
+      ) 
   })
 }
+
 # Run the Shiny app
 shinyApp(ui, server)

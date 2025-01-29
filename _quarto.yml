@@ -7,10 +7,10 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
       - hourlydemand.qmd
       - monthlydemand.qmd
       - membervcasual.qmd
+      - about.qmd
 
 format:
   html:

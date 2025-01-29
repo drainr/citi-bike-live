@@ -1,10 +1,7 @@
 ---
 title: "Citi Bikes"
 ---
-Every day, people use bikes from the CitiBike network in New York City to get around- whether it be to the high rises in Manhattan or to the nearest deli, this gives us information on how a large part of the population moves. I gathered this data from the CitiBikes in New York, specifically from the months of June and December 2024, as well as their feed of live data. My main goal in this project was to explore different facets of the experience as a CitiBike rider and trying to analyze the data to see what's found. Most users follow the general trends you see in other forms of transportation.
 
-
-Below is a dynamic visualization of Citi Bike usage across the city:
  ```{=html}
 <iframe src="https://drainr.shinyapps.io/citibike-heatmap/" 
         width="100%" 
@@ -12,3 +9,4 @@ Below is a dynamic visualization of Citi Bike usage across the city:
         style="border:none;">
 </iframe>
 ```
+Every day, people use bikes from the CitiBike network in New York City to get around- whether it be to the high rises in Manhattan or to the nearest deli, this gives us information on how a large part of the population moves. I gathered this data from the CitiBikes in New York, specifically from the months of June and December 2024, as well as their feed of live data. My main goal in this project was to explore different facets of the experience as a CitiBike rider and trying to analyze the data to see what's found. Most users follow the general trends you see in other forms of transportation, though the exceptions are to be explored going forth.

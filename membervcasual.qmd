@@ -55,8 +55,9 @@ trip_data <- trip_data |>
 ggplot(trip_data, aes(x = ride_duration, fill = member_casual)) +
   geom_density(alpha = 0.5) +  # Density plot with transparency
   labs(title = "Distribution of Ride Durations (Members vs. Casual Users)",
+       subtitle = "Area under each curve is 1",
        x = "Ride Duration (Minutes)",
-       y = "Density",
+       y = "Relative Frequency (Density)",
        fill = "User Type") +
   scale_x_continuous(limits = c(0, 120)) +  # Limit x-axis to 0-120 minutes for better visualization
   theme_minimal()
@@ -79,7 +80,8 @@ ggplot(hourly_usage, aes(x = hour_of_day, y = total_rides, fill = member_casual)
        x = "Hour of the Day",
        y = "Total Rides",
        fill = "User Type") +
-  scale_x_continuous(breaks = 0:23, labels = paste0(0:23, ":00")) +  # Format x-axis labels
+  scale_x_continuous(breaks = 0:23, labels = paste0(0:23, ":00")) +  # Format x-axis labels 
+  scale_y_continuous(labels = scales::comma)
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability
 ```

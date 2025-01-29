@@ -4,7 +4,14 @@ title: "About"
 
 I am [Angelo Morelli](https://github.com/drainr) (angelomorelliam08@gmail.com), a Computer Science student at NCF.
 
-[This project](https://github.com/drainr/citi-bike-live) was an exploration of trends among CitiBike riders in New York City.
+[This project](https://github.com/drainr/citi-bike-live) was an exploration of trends among CitiBike riders in New York City, and was created as part of [David Kane's Techne: Getting the Future you Want ISP](isp.davidkane.info).
 
-This project was created as part of [David Kane's Techne: Getting the Future you Want ISP](isp.davidkane.info).
+Data Sources: 
 
+Live Data: [GBFS Citi Bike NYC](https://gbfs.citibikenyc.com/gbfs/2.3/gbfs.json)
+
+Historical Data: [Trip Data (used June/Dec 2024)](https://s3.amazonaws.com/tripdata/index.html)
+
+Sources:
+
+Deepseek: [Deepseek AI](https://chat.deepseek.com/)

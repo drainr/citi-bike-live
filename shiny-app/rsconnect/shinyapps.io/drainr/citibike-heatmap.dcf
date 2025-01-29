@@ -5,6 +5,6 @@ account: drainr
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 13828040
-bundleId: 9710116
+bundleId: 9714461
 url: https://drainr.shinyapps.io/citibike-heatmap/
 version: 1
