@@ -81,7 +81,7 @@ ggplot(hourly_usage, aes(x = hour_of_day, y = total_rides, fill = member_casual)
        y = "Total Rides",
        fill = "User Type") +
   scale_x_continuous(breaks = 0:23, labels = paste0(0:23, ":00")) +  # Format x-axis labels 
-  scale_y_continuous(labels = scales::comma)
+  scale_y_continuous(labels = scales::comma) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability
 ```

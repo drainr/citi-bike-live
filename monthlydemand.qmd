@@ -8,7 +8,7 @@ execute:
   warning: false
 ---
 
-## Bike Demand, by Hour of the Day & Day of the Month 
+## Bike Demand, by Hour of the Day & Day of the Month
 
 This page explores bike usage patterns between two separate months, revealing differences and trends in user behavior dependent upon time.
 
@@ -18,15 +18,27 @@ This page explores bike usage patterns between two separate months, revealing di
 library(tidyverse)
 library(ggplot2)
 library(scales)
+library(readr)
+library(gifski)
+library(gganimate)
+library(lubridate)
 ```
 
 ```{r}
 #| cache: TRUE
 
-june_data <- read_csv(unzip("202406-citibike-tripdata.zip"))
+june_data1 <- read_csv("202406-citibike-tripdata_1.csv")
+june_data2 <- read_csv("202406-citibike-tripdata_2.csv")
+june_data3 <- read_csv("202406-citibike-tripdata_3.csv")
+june_data4 <- read_csv("202406-citibike-tripdata_4.csv")
+june_data5 <- read_csv("202406-citibike-tripdata_5.csv")
+june_data <- bind_rows(june_data1, june_data2, june_data3, june_data4, june_data5)
 
-december_data <- read_csv(unzip("202412-citibike-tripdata.zip"))
-                          
+december_data1 <- read_csv("202412-citibike-tripdata_1.csv")
+december_data2 <- read_csv("202412-citibike-tripdata_2.csv")
+december_data3 <- read_csv("202412-citibike-tripdata_3.csv")
+december_data <- bind_rows(december_data1, december_data2, december_data3)
+
 trip_data <- bind_rows(june_data, december_data)
 ```
 
@@ -34,33 +46,7 @@ trip_data <- bind_rows(june_data, december_data)
 
 This graph compares the number of bike trips on the average day in June and December, showing how December usage is quite a bit lower on all fronts (likely due to the colder weather). They both align with the peaks of commuting hours.
 
-```{r}
-trip_data <- trip_data |>
-  mutate(started_at = as.POSIXct(started_at, format = "%Y-%m-%d %H:%M:%S"))
-
-monthly_demand <- trip_data |>
-  mutate(
-    month = format(started_at, "%B"),  # Extract month name (e.g., "June", "December")
-    hour = as.numeric(format(started_at, "%H"))  # Extract hour as numeric (0-23)
-  ) |>
-  filter(month %in% c("June", "December")) |>  # Keep only June and December
-  group_by(month, hour) |>
-  summarise(total_trips = n(), .groups = "drop")
-```
-
-```{r}
-ggplot(monthly_demand, aes(x = hour, y = total_trips, color = month)) +
-  geom_line(size = 1) +  # Add line for trends
-  labs(title = "Bike Demand by Hour of the Day (June vs. December)",
-       x = "Hour of the Day",
-       y = "Total Trips",
-       color = "Month") +
-  scale_x_continuous(breaks = 0:23, labels = paste0(0:23, ":00")) +  # Format x-axis labels
-  scale_y_continuous(labels = unit_format(unit = "k", scale = 1e-3)) +  # Format y-axis labels as "100k", "200k", etc.
-  scale_color_manual(values = c("June" = "darkblue", "December" = "darkred")) +  # Custom colors for months
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability
-```
+![](./images/monthly_demand.gif)
 
 # Demand by Day of the Month
 
@@ -90,4 +76,3 @@ ggplot(daily_demand, aes(x = day_of_month, y = total_trips, color = month)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability
 ```
-
