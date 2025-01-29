@@ -18,7 +18,7 @@
     "href": "index.html",
     "title": "Citi Bikes",
     "section": "",
-    "text": "Every day, people use bikes from the CitiBike network in New York City to get around- whether it be to the high rises in Manhattan or to the nearest deli, this gives us information on how a large part of the population moves. I gathered this data from the CitiBikes in New York, specifically from the months of June and December 2024, as well as their feed of live data. My main goal in this project was to explore different facets of the experience as a CitiBike rider and trying to analyze the data to see what’s found. Most users follow the general trends you see in other forms of transportation.\nBelow is a dynamic visualization of Citi Bike usage across the city:"
+    "text": "Every day, people use bikes from the CitiBike network in New York City to get around- whether it be to the high rises in Manhattan or to the nearest deli, this gives us information on how a large part of the population moves. I gathered this data from the CitiBikes in New York, specifically from the months of June and December 2024, as well as their feed of live data. My main goal in this project was to explore different facets of the experience as a CitiBike rider and trying to analyze the data to see what’s found. Most users follow the general trends you see in other forms of transportation, though the exceptions are to be explored going forth."
   },
   {
     "objectID": "membervcasual.html",
@@ -39,13 +39,13 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "I am Angelo Morelli (angelomorelliam08@gmail.com), a Computer Science student at NCF.\nThis project was an exploration of trends among CitiBike riders in New York City.\nThis project was created as part of David Kane’s Techne: Getting the Future you Want ISP."
+    "text": "I am Angelo Morelli (angelomorelliam08@gmail.com), a Computer Science student at NCF.\nThis project was an exploration of trends among CitiBike riders in New York City, and was created as part of David Kane’s Techne: Getting the Future you Want ISP.\nData Sources:\nLive Data: GBFS Citi Bike NYC\nHistorical Data: Trip Data (used June/Dec 2024)\nSources:\nDeepseek: Deepseek AI"
   },
   {
     "objectID": "hourlydemand.html",
     "href": "hourlydemand.html",
     "title": "Hourly Demand",
     "section": "",
-    "text": "Bike Demand, by Hour\nAs people head to work, grab lunch, or return home, Citi Bikes play a crucial role in urban mobility, trending with the “rush hour” schedule of the average person’s daily transportation."
+    "text": "Bike Demand, by Hour of the Day\nAs people head to work, grab lunch, or return home, Citi Bikes play a crucial role in urban mobility, trending with the “rush hour” schedule of the average person’s daily transportation."
   }
 ]
